@@ -168,16 +168,13 @@ class _TextSpechState extends State<Texspech> {
         backgroundColor: Colors.orange,
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _buildChatInput(),
-              const SizedBox(height: 20),
-              _languageDropDownSection(),
-            ],
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _languageDropDownSection(),
+            _buildChatInput(),
+            const SizedBox(height: 20),
+          ],
         ),
       ),
     );
@@ -209,7 +206,7 @@ class _TextSpechState extends State<Texspech> {
           FloatingActionButton(
             onPressed: _speak,
             backgroundColor: Colors.orange,
-            child: Icon(
+            child: const Icon(
               Icons.play_arrow,
               color: Colors.white,
               size: 36.0, // Adjust the size as needed
@@ -225,12 +222,16 @@ class _TextSpechState extends State<Texspech> {
       future: _getLanguages(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return DropdownButton<String>(
-            value: language,
-            items: getLanguageDropDownMenuItems(snapshot.data as List<dynamic>),
-            onChanged: changedLanguageDropDownItem,
-            hint: const Text("Selecciona un idioma"),
-            isExpanded: true,
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: DropdownButton<String>(
+              value: language,
+              items:
+                  getLanguageDropDownMenuItems(snapshot.data as List<dynamic>),
+              onChanged: changedLanguageDropDownItem,
+              hint: const Text("Selecciona un idioma"),
+              isExpanded: true,
+            ),
           );
         } else if (snapshot.hasError) {
           return const Text('Error cargando los idiomas');
