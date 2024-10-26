@@ -120,9 +120,9 @@ class _SpechsTextState extends State<SpeechText> {
       ),
       body: Column(
         children: [
+          _buildLanguageSelector(), // Selector de idiomas
           _buildChatInput(),
           _buildErrorStatus(),
-          _buildLanguageSelector(), // Selector de idiomas
         ],
       ),
     );
