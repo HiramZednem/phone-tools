@@ -236,7 +236,6 @@ class _TextSpechState extends State<Texspech> {
                     items: getLanguageDropDownMenuItems(
                         snapshot.data as List<dynamic>),
                     onChanged: changedLanguageDropDownItem,
-                    hint: const Text("Selecciona un idioma"),
                     isExpanded: true,
                     dropdownColor: Colors.white,
                   ),
