@@ -26,63 +26,20 @@ class _QrCodeScannerState extends State<QR> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
-          'QR',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+          'QR Scanner',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.amber,
-        actions: [
-          // PopupMenuButton para mostrar el menú desplegable
-          PopupMenuButton<int>(
-            color: Colors.white,
-            icon: const CircleAvatar(
-              backgroundImage:
-                  AssetImage('assets/foto.jpg'), // Imagen de perfil
-            ),
-            offset: const Offset(-0, 50), // Despliega hacia la izquierda
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<int>>[
-              const PopupMenuItem<int>(
-                value: 0,
-                child: ListTile(
-                  leading: Icon(Icons.person),
-                  title: Text('Yahir Alberto'),
-                  subtitle: Text('Albores Madrigal'),
-                ),
-              ),
-              const PopupMenuItem<int>(
-                value: 0,
-                child: ListTile(
-                  leading: Icon(Icons.badge),
-                  title: Text('221228'),
-                ),
-              ),
-              const PopupMenuItem<int>(
-                value: 0,
-                child: ListTile(
-                  leading: Icon(Icons.computer),
-                  title: Text('Ingeneria en Software'),
-                ),
-              ),
-              PopupMenuItem<int>(
-                value: 2,
-                child: IconButton(
-                    icon: SvgPicture.asset('assets/iconsgit2.svg',
-                        height: 50, width: 50),
-                    iconSize: 50,
-                    padding: const EdgeInsets.all(10),
-                    onPressed: () {
-                      launch(
-                          "https://github.com/YahirAlbores221228/Aplications.git");
-                    }),
-              ),
-            ],
-          ),
-        ],
+        backgroundColor: Colors.orange,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.orange, width: 4),
+                borderRadius: BorderRadius.circular(12),
+              ),
               height: 250,
               width: 250,
               child: MobileScanner(
@@ -102,13 +59,12 @@ class _QrCodeScannerState extends State<QR> {
             ),
             const SizedBox(height: 20),
             Text(
-              Qrresult ?? 'Escanea un código QR',
-              style: const TextStyle(fontSize: 18, color: Colors.grey),
+              Qrresult ?? 'Scan a QR code',
+              style: const TextStyle(fontSize: 20, color: Colors.black),
             ),
           ],
         ),
       ),
     );
   }
-
 }
