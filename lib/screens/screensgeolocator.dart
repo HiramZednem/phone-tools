@@ -57,7 +57,7 @@ class _LocationState extends State<Location> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.amber,
+        backgroundColor: Colors.orange,
         title: const Text("Location",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
       ),
@@ -75,11 +75,11 @@ class _LocationState extends State<Location> {
               const SizedBox(height: 20),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Colors.orange,
                     padding: const EdgeInsets.all(15)),
                 onPressed: _googleMapsLink != null ? _openGoogleMaps : null,
                 child: const Text(
-                  "Abrir en Google Maps",
+                  "Maps",
                   style: TextStyle(color: Colors.white),
                 ),
               ),

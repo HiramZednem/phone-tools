@@ -44,7 +44,7 @@ class _MyHomePageState extends State<Screenssensor> {
       appBar: AppBar(
         title: const Text('Sensors Plus',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
-        backgroundColor: Colors.amber,
+        backgroundColor: Colors.orange,
         elevation: 4,
       ),
       body: Column(

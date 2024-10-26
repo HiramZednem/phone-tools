@@ -1,3 +1,4 @@
+import 'package:aplications/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'screens/sreensQR.dart';
 import 'screens/screenspechtext.dart';
@@ -11,12 +12,12 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.amber, 
+        primarySwatch: Colors.amber,
       ),
       home: const BottomNavigationBarExample(),
       debugShowCheckedModeBanner: false,
@@ -37,11 +38,12 @@ class _BottomNavigationBarExampleState
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
+    Home(),
     QR(),
     SpeechText(),
     Texspech(),
-    Screenssensor(),
     Location(),
+    Screenssensor(),
   ];
 
   void _onItemTapped(int index) {
@@ -57,36 +59,41 @@ class _BottomNavigationBarExampleState
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,  // Fijo para asegurar el comportamiento correcto
-        backgroundColor: Colors.white,        // Forzamos el fondo blanco
+        type: BottomNavigationBarType
+            .fixed, // Fijo para asegurar el comportamiento correcto
+        backgroundColor: Colors.white, // Forzamos el fondo blanco
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.qr_code),
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.qr_code_scanner_rounded),
             label: 'QR',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.mic),
-            label: 'Audio',
+            icon: Icon(Icons.voice_chat),
+            label: 'Speech',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.text_fields),
+            icon: Icon(Icons.chat_bubble_outline_rounded),
             label: 'Text',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.motion_photos_on),
-            label: 'Sensor',
+            icon: Icon(Icons.location_on_outlined),
+            label: 'Coords',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.location_on),
-            label: 'Loc',
+            icon: Icon(Icons.phone_android),
+            label: 'About',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800], // Color de los ítems seleccionados
-        unselectedItemColor: Colors.grey,     // Color de los ítems no seleccionados
+        selectedItemColor:
+            Colors.amber[800], // Color de los ítems seleccionados
+        unselectedItemColor: Colors.grey, // Color de los ítems no seleccionados
         onTap: _onItemTapped,
       ),
     );
   }
 }
-
