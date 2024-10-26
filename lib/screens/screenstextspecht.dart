@@ -173,8 +173,7 @@ class _TextSpechState extends State<Texspech> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _inputSection(),
-              _btnSection(),
+              _buildChatInput(),
               const SizedBox(height: 20),
               _languageDropDownSection(),
             ],
@@ -184,53 +183,40 @@ class _TextSpechState extends State<Texspech> {
     );
   }
 
-  Widget _inputSection() => Container(
-        decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 255, 255, 255),
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: const [
-            BoxShadow(
-              color: Color.fromARGB(115, 32, 32, 32),
-              blurRadius: 10,
-              offset: Offset(0, 5),
+  Widget _buildChatInput() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(12.0),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: TextField(
+                onChanged: _onChange,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Escribe algo",
+                  hintStyle: TextStyle(color: Colors.grey),
+                ),
+              ),
             ),
-          ],
-        ),
-        padding: const EdgeInsets.all(16.0),
-        child: TextField(
-          maxLines: 5,
-          onChanged: _onChange,
-          decoration: const InputDecoration(
-            border: InputBorder.none,
-            hintText: "Escribe el texto a convertir en voz",
-            hintStyle: TextStyle(color: Colors.grey),
           ),
-        ),
-      );
-
-  Widget _btnSection() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        _buildButtonColumn(Colors.green, Icons.play_arrow, 'PLAY', _speak),
-      ],
-    );
-  }
-
-  Widget _buildButtonColumn(
-      Color color, IconData icon, String label, Function onPress) {
-    return Column(
-      children: [
-        FloatingActionButton(
-          onPressed: () => onPress(),
-          backgroundColor: Colors.orange,
-          child: Icon(
-            Icons.play_arrow,
-            color: Colors.white,
-            size: 36.0, // Adjust the size as needed
+          const SizedBox(width: 8.0),
+          FloatingActionButton(
+            onPressed: _speak,
+            backgroundColor: Colors.orange,
+            child: Icon(
+              Icons.play_arrow,
+              color: Colors.white,
+              size: 36.0, // Adjust the size as needed
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
