@@ -122,16 +122,6 @@ class _TextSpechState extends State<Texspech> {
     await flutterTts.awaitSpeakCompletion(true);
   }
 
-  Future<void> _stop() async {
-    var result = await flutterTts.stop();
-    if (result == 1) setState(() => ttsState = TtsState.stopped);
-  }
-
-  Future<void> _pause() async {
-    var result = await flutterTts.pause();
-    if (result == 1) setState(() => ttsState = TtsState.paused);
-  }
-
   @override
   void dispose() {
     super.dispose();
@@ -173,8 +163,9 @@ class _TextSpechState extends State<Texspech> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Text to Speech', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
-        backgroundColor: Colors.amber,
+        title: const Text('Text to Speech',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
+        backgroundColor: Colors.orange,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -183,9 +174,6 @@ class _TextSpechState extends State<Texspech> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               _inputSection(),
-              const SizedBox(height: 20),
-              _buildSliders(),
-              const SizedBox(height: 20),
               _btnSection(),
               const SizedBox(height: 20),
               _languageDropDownSection(),
@@ -225,8 +213,6 @@ class _TextSpechState extends State<Texspech> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         _buildButtonColumn(Colors.green, Icons.play_arrow, 'PLAY', _speak),
-        _buildButtonColumn(Colors.red, Icons.stop, 'STOP', _stop),
-        _buildButtonColumn(Colors.blue, Icons.pause, 'PAUSE', _pause),
       ],
     );
   }
@@ -235,16 +221,14 @@ class _TextSpechState extends State<Texspech> {
       Color color, IconData icon, String label, Function onPress) {
     return Column(
       children: [
-        IconButton(
-          icon: Icon(icon),
-          color: color,
+        FloatingActionButton(
           onPressed: () => onPress(),
-          iconSize: 40,
-        ),
-        Text(
-          label,
-          style: TextStyle(
-              color: color, fontSize: 16, fontWeight: FontWeight.w600),
+          backgroundColor: Colors.orange,
+          child: Icon(
+            Icons.play_arrow,
+            color: Colors.white,
+            size: 36.0, // Adjust the size as needed
+          ),
         ),
       ],
     );
@@ -268,41 +252,6 @@ class _TextSpechState extends State<Texspech> {
           return const Text('Cargando idiomas...');
         }
       },
-    );
-  }
-
-  Widget _buildSliders() {
-    return Column(
-      children: [
-        _slider("Volumen", volume, (value) {
-          setState(() => volume = value);
-        }, 0.0, 1.0),
-        _slider("Pitch", pitch, (value) {
-          setState(() => pitch = value);
-        }, 0.5, 2.0),
-        _slider("Velocidad", rate, (value) {
-          setState(() => rate = value);
-        }, 0.0, 1.0),
-      ],
-    );
-  }
-
-  Widget _slider(String label, double value, Function(double) onChanged,
-      double min, double max) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text("$label: ${(value).toStringAsFixed(2)}",
-            style: const TextStyle(fontSize: 16)),
-        Slider(
-          value: value,
-          onChanged: onChanged,
-          min: min,
-          max: max,
-          divisions: 10,
-          label: value.toString(),
-        ),
-      ],
     );
   }
 }
