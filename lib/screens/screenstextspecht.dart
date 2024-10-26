@@ -223,20 +223,30 @@ class _TextSpechState extends State<Texspech> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: DropdownButton<String>(
-              value: language,
-              items:
-                  getLanguageDropDownMenuItems(snapshot.data as List<dynamic>),
-              onChanged: changedLanguageDropDownItem,
-              hint: const Text("Selecciona un idioma"),
-              isExpanded: true,
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text('Seleccionar idioma: ',
+                    style: TextStyle(fontSize: 16, color: Colors.black)),
+                Flexible(
+                  child: DropdownButton<String>(
+                    value: language,
+                    items: getLanguageDropDownMenuItems(
+                        snapshot.data as List<dynamic>),
+                    onChanged: changedLanguageDropDownItem,
+                    hint: const Text("Selecciona un idioma"),
+                    isExpanded: true,
+                    dropdownColor: Colors.white,
+                  ),
+                ),
+              ],
             ),
           );
-        } else if (snapshot.hasError) {
-          return const Text('Error cargando los idiomas');
         } else {
-          return const Text('Cargando idiomas...');
+          return const SizedBox
+              .shrink(); // Ocultar en caso de que no haya datos
         }
       },
     );
