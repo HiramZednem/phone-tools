@@ -121,7 +121,6 @@ class _SpechsTextState extends State<SpeechText> {
       body: Column(
         children: [
           Expanded(
-            flex: 3,
             child: _buildRecognitionResults(),
           ),
           Expanded(
@@ -137,19 +136,10 @@ class _SpechsTextState extends State<SpeechText> {
 
   Widget _buildRecognitionResults() {
     return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.orange.shade100,
-        borderRadius: BorderRadius.circular(10),
-      ),
       margin: const EdgeInsets.all(20),
-      child: Center(
-        child: Text(
-          lastWords,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-              fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
-        ),
+      child: Text(
+        lastWords,
+        textAlign: TextAlign.left,
       ),
     );
   }
@@ -177,12 +167,6 @@ class _SpechsTextState extends State<SpeechText> {
             _isListening ? Icons.mic : Icons.mic_off,
             color: Colors.white,
           ),
-        ),
-        const SizedBox(height: 20),
-        Text(
-          _isListening ? 'Escuchando...' : 'Toque el micrófono para empezar',
-          style: const TextStyle(
-              fontSize: 16, fontWeight: FontWeight.w400, color: Colors.black),
         ),
       ],
     ));
