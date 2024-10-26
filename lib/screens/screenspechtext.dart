@@ -148,18 +148,6 @@ class _SpechsTextState extends State<SpeechText> {
     return SingleChildScrollView(
         child: Column(
       children: [
-        // Indicador de nivel de sonido
-        Container(
-          padding: const EdgeInsets.all(10),
-          child: LinearProgressIndicator(
-            value: level / 100, // Normalización del nivel de sonido
-            minHeight: 10,
-            backgroundColor: Colors.grey.shade300,
-            valueColor: const AlwaysStoppedAnimation<Color>(Colors.orange),
-          ),
-        ),
-        const SizedBox(height: 10),
-        // Botón para empezar o parar de escuchar
         FloatingActionButton(
           onPressed: _isListening ? _stopListening : _startListening,
           backgroundColor: _isListening ? Colors.green : Colors.orange,
