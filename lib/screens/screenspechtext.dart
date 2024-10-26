@@ -120,13 +120,7 @@ class _SpechsTextState extends State<SpeechText> {
       ),
       body: Column(
         children: [
-          Expanded(
-            child: _buildRecognitionResults(),
-          ),
-          Expanded(
-            flex: 1,
-            child: _buildControls(),
-          ),
+          _buildChatInput(),
           _buildErrorStatus(),
           _buildLanguageSelector(), // Selector de idiomas
         ],
@@ -134,30 +128,36 @@ class _SpechsTextState extends State<SpeechText> {
     );
   }
 
-  Widget _buildRecognitionResults() {
-    return Container(
-      margin: const EdgeInsets.all(20),
-      child: Text(
-        lastWords,
-        textAlign: TextAlign.left,
+  Widget _buildChatInput() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(12.0),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Text(
+                lastWords,
+                style: const TextStyle(fontSize: 16),
+              ),
+            ),
+          ),
+          const SizedBox(width: 8.0),
+          FloatingActionButton(
+            onPressed: _isListening ? _stopListening : _startListening,
+            backgroundColor: _isListening ? Colors.green : Colors.orange,
+            child: Icon(
+              _isListening ? Icons.mic : Icons.mic_off,
+              color: Colors.white,
+            ),
+          ),
+        ],
       ),
     );
-  }
-
-  Widget _buildControls() {
-    return SingleChildScrollView(
-        child: Column(
-      children: [
-        FloatingActionButton(
-          onPressed: _isListening ? _stopListening : _startListening,
-          backgroundColor: _isListening ? Colors.green : Colors.orange,
-          child: Icon(
-            _isListening ? Icons.mic : Icons.mic_off,
-            color: Colors.white,
-          ),
-        ),
-      ],
-    ));
   }
 
   Widget _buildErrorStatus() {
